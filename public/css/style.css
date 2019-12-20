@@ -1,0 +1,76 @@
+html, body {
+  height: 100%;
+  background-image: url("jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
+  background-color: #27253c;
+  background-size: contain;
+}
+
+* {
+  font-family: Avenir-Book, Roboto, sans-serif;
+}
+
+#container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
+
+#container > div {
+  /* background: #101357; */
+  background: #FBFBF2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  box-shadow: 5px -5px 30px 0px #27253c;
+}
+
+#left {
+  border-radius: 2%;
+  color: #27253c;
+  width: 40%;
+  height: 70%;
+}
+
+#right {
+  /* align-self: center; */
+  border-radius: 2%;
+  color: #27253c;
+  width: 40%;
+  height: 70%;
+  justify-items: flex-start;
+}
+
+#Text {
+  max-height: 20%;
+  padding: 20px;
+}
+
+#image {
+  min-height: 50%;
+  max-height: 70%;
+  padding: 5px;
+  max-width: 100%;
+  min-width: 50%;
+}
+
+#jokeButton {
+  /* background: #fbaf08; */
+  border-radius: 7px;
+  border: none;
+  color: white;
+  /* background-image: linear-gradient(to bottom, #eb94d0, #2079b0); */
+  background-color: #fbaf08;
+  text-shadow: 3px 2px 1px #9daef5;
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+#jokeButton:hover {
+  /* background-image: linear-gradient(to bottom, #2079b0, #eb94d0); */
+  text-decoration: none;
+  background-color: #fbd608
+}
