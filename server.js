@@ -1,34 +1,60 @@
-//Getting stylesheets
-// console.log("start here");
-// import 'style.css';
-// require('dotenv').config();
-// console.log(process.env);
-
+require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+const fetch = require('node-fetch');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
+
+console.log();
+var API_KEY = 'DEMO_KEY';
+if(process.env.API_KEY != undefined && process.env.API_KEY != '') {
+  API_KEY = process.env.API_KEY;
+}
+
+const API = `https://api.nasa.gov`
+
+console.log(`Using Base URL: ${API}`);
+
+function getPotD() {
+
+}
+
+const simpleGet = {
+  method: 'GET',
+  headers: {
+    "Accept": 'application/json'
+  } 
+}
 
 app.get('/', function (req, res) {
-  res.render('index');
+  //Sets picture of the day
+  var potdURL;
+  var altText;
+  url = `${API}/planetary/apod?api_key=${API_KEY}`;
+  // console.log(url);
+  fetch(url, simpleGet)
+  .then(resp => resp.json())
+  .then(resp => {
+    potdURL = resp.url;
+    altText = resp.explanation;
+    if(potdURL === undefined) {
+      potdURL = "https://apod.nasa.gov/apod/image/1912/J0030_NICER_1024.jpg";
+    }
+    // console.log(`potdURL: ${potdURL}`);
+    res.render('index', {
+      imgSrc: potdURL,
+      text: altText
+    });
+  })
+  .catch(err=> {
+    console.error(err);
+  })
 })
 
-app.listen(3000, function () {
-<<<<<<< HEAD
-  console.log(`Listening on port 3000`);
-=======
-  console.log('Example app listening on port 3000!')
->>>>>>> 45db47a4d748316aec93966dcceba8badd02402b
+app.listen(9001, function () {
+  console.log(`Listening on port 9001`);
 })
 
-console.log("got here");
-
-// const APIURL = 
-
-const options = {
-    method: 'GET',
-    headers: {
-      "Accept": 'application/json'
-    } 
-  }

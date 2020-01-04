@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head title="NASAPI Explorer">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
         <body>
             <div id="container">
-            <div id="left">
-                <h1>NASAPI Explorer</h1>
-                <p>Out of this world!</p>
-                <button id="jokeButton">Do a thing</button>
+                <div id="left">
+                    <h1 id="title">NASAPI Explorer</h1>
+                    <p id="byline">Out of this world!</p>
+                    <button id="asteroids">Show asteroids closest to Earth</button>
+                    <button id="button2">Test</button>
+                </div>
+                <div id="right">
+                    <h1>NASA's Astronomy Picture of the Day</h1>
+                    <p id="dispText"></p>
+                    <img id="dispImage" src="<%=imgSrc%>" title="<%=text%>"> </img>
+                </div>
             </div>
-            <div id="right">
-                <h1>NASA's Image of the day</h1>
-                <p id="Text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus consequat.</p>
-                <img id="image" src="https://apod.nasa.gov/apod/image/1912/AS17-149-22859-2v2SmlWmk1024.jpg"></img>
-            </div>
-            </div>
+            <script src="client.js"></script>
         </body>
-    
 </html>

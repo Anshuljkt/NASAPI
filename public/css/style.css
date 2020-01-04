@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  background-image: url("jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
+  background-image: url("../jeremy-thomas-E0AHdsENmDg-unsplash.jpg");
   background-color: #27253c;
   background-size: contain;
 }
@@ -16,6 +16,15 @@ html, body {
   height: 100%;
 }
 
+#title {
+  margin-block-end: 0.3em;
+}
+
+#byline {
+  margin-block-start: 0px;
+  margin-block-end: 2em;
+  font-style: italic;
+}
 
 #container > div {
   /* background: #101357; */
@@ -32,7 +41,7 @@ html, body {
   border-radius: 2%;
   color: #27253c;
   width: 40%;
-  height: 70%;
+  height: 80%;
 }
 
 #right {
@@ -40,37 +49,37 @@ html, body {
   border-radius: 2%;
   color: #27253c;
   width: 40%;
-  height: 70%;
+  height: 80%;
   justify-items: flex-start;
 }
 
-#Text {
+#dispText {
   max-height: 20%;
   padding: 20px;
 }
 
-#image {
-  min-height: 50%;
-  max-height: 70%;
+#dispImage {
+  max-height: 80%;
+  max-width: 80%;
   padding: 5px;
-  max-width: 100%;
-  min-width: 50%;
 }
 
-#jokeButton {
+button {
   /* background: #fbaf08; */
   border-radius: 7px;
   border: none;
   color: white;
   /* background-image: linear-gradient(to bottom, #eb94d0, #2079b0); */
-  background-color: #fbaf08;
-  text-shadow: 3px 2px 1px #9daef5;
+  background-color: #000F3A;
+  /* text-shadow: 3px 2px 1px #9daef5; */
   font-size: 1.5em;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
-#jokeButton:hover {
+button:hover {
   /* background-image: linear-gradient(to bottom, #2079b0, #eb94d0); */
   text-decoration: none;
-  background-color: #fbd608
+  background-color: #0E4E65;
+  /* background-color: #776092 */
 }
