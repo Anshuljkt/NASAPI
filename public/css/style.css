@@ -42,10 +42,10 @@ html, body {
   color: #27253c;
   width: 40%;
   height: 80%;
+  align-content: center;
 }
 
 #right {
-  /* align-self: center; */
   border-radius: 2%;
   color: #27253c;
   width: 40%;
@@ -75,7 +75,9 @@ form > * {
   /* padding: 10px; */
   margin-right: 5px;
   margin-left: 5px;
+  margin-bottom: 10px;
 }
+
 
 button {
   /* background: #fbaf08; */
@@ -87,7 +89,7 @@ button {
   /* text-shadow: 3px 2px 1px #9daef5; */
   font-size: 1.5em;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 7.5%;
 }
 
 button:hover {

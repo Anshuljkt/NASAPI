@@ -9,7 +9,7 @@ const image = document.getElementById("dispImage");
 const imagerySearchButton = document.getElementById("imagerySearch");
 const marsSearchButton = document.getElementById("curiositySearch");
 const librarySearchButton = document.getElementById("librarySearch");
-
+const epicButton = document.getElementById("epic")
 
 asteroidButton.addEventListener('click', function (e) {
     var request = new XMLHttpRequest()
@@ -140,7 +140,7 @@ librarySearchButton.addEventListener('click', function (e) {
                 height: "100%",
                 responsiveLayout: true,
                 columns: [
-                    { title: "Title", field: "title", sorter: "string", width:200 },
+                    { title: "Title", field: "title", sorter: "string", width: 200 },
                     { title: "Date", field: "date" },
                     { title: "Type", field: "type", sorter: "string" },
                     { title: "Link", field: "link", formatter: "link", formatterParams: { label: "View media" } }
@@ -149,22 +149,63 @@ librarySearchButton.addEventListener('click', function (e) {
             data.forEach(result => {
                 linkToMedia = result.href
                 fetch(linkToMedia)
-                .then(res => res.json())
-                .then(json => {
-                    console.log(json);
-                    href = json[0];
-                    var currResult = {
-                        type: result.data[0].media_type,
-                        date: result.data[0].date_created,
-                        title: result.data[0].title,
-                        link: href
-                    }
-                    table.addData(currResult);
-                })
-                
+                    .then(res => res.json())
+                    .then(json => {
+                        console.log(json);
+                        href = json[0];
+                        var currResult = {
+                            type: result.data[0].media_type,
+                            date: result.data[0].date_created,
+                            title: result.data[0].title,
+                            link: href
+                        }
+                        table.addData(currResult);
+                    })
+
             })
             table.redraw(true);
         }
         request.send();
     }
+})
+
+epicButton.addEventListener('click', function (e) {
+    var request = new XMLHttpRequest()
+    request.open('GET', `/epicImagery`, true)
+    request.onload = function () {
+        data = JSON.parse(this.response);
+        var images = [];
+        data.forEach(image => {
+            console.log(image);
+            var currImage = {
+                date: image.date,
+                caption: image.caption,
+                link: image.image,
+            }
+            console.log(currImage.date);
+            parsedDate = new Date(currImage.date);
+            year = parsedDate.getFullYear() + "";
+            month = parsedDate.getMonth() + 1 + "";
+            date = parsedDate.getDate() + "";
+            url = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month.padStart(2, '0')}/${date.padStart(2, '0')}/png/${currImage.link}.png`;
+            currImage.link = url;
+            images.push(currImage);
+        })
+
+        rightTitle.textContent = "EPIC Imagery"
+        rightText.textContent = `Using NASA's EPIC API which provides daily imagery collected by DSCOVR's Earth Polychromatic Imaging Camera (EPIC).`
+        var table = new Tabulator("#dispContent", {
+            data: images,
+            layout: "fitDataFill",
+            height: "100%",
+            responsiveLayout: true,
+            columns: [
+                { title: "Date", field: "date", sorter: "date" },
+                { title: "Caption", field: "caption", sorter: "string", width: 300 },
+                { title: "Link", field: "link", formatter: "link", formatterParams: { label: "View image" } }
+            ]
+        });
+        table.redraw(true);
+    }
+    request.send();
 })

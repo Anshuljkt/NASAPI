@@ -108,6 +108,19 @@ app.get('/search/:query', function(req, res) {
   })
 })
 
+app.get('/epicImagery', function(req, res) {
+  url = `${API}/EPIC/api/natural/images?api_key=${API_KEY}`
+  console.log(url);
+  fetch(url, simpleGet)
+  .then(resp => resp.json())
+  .then(resp => {
+    res.send(resp);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+})
+
 app.listen(9001, function () {
   console.log(`Listening on port 9001`);
 })
