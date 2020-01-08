@@ -2,6 +2,7 @@
 <html>
     <head title="NASAPI Explorer">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" href="/tabulator/css/tabulator_modern.min.css">
     </head>
         <body>
             <div id="container">
@@ -9,14 +10,28 @@
                     <h1 id="title">NASAPI Explorer</h1>
                     <p id="byline">Out of this world!</p>
                     <button id="asteroids">Show asteroids closest to Earth</button>
+                    <form id="earthImagery">
+                        Latitude: <input type = "number" id = "lat">
+                        Longitude: <input type = "number" id = "long">
+                        <button type="button" id="imagerySearch">Find Earth imagery!</button>
+                    </form>
+                    <form id="curiosityImagery">
+                        Sol # of Curiosity Rover's mission: <input type = "number" id = "sol">
+                        <button type="button" id="curiositySearch">Fetch Mars imagery!</button>
+                    </form>
                     <button id="button2">Test</button>
                 </div>
                 <div id="right">
-                    <h1>NASA's Astronomy Picture of the Day</h1>
+                    <h1 id="dispTitle">NASA's Astronomy Picture of the Day</h1>
                     <p id="dispText"></p>
-                    <img id="dispImage" src="<%=imgSrc%>" title="<%=text%>"> </img>
+                    <div id="dispContent">
+                        <img id="dispImage" src="<%=imgSrc%>" title="<%=text%>"> </img>
+                    </div>
+                    
                 </div>
             </div>
-            <script src="client.js"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+            <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
+            <script type="text/javascript" src="client.js"></script>
         </body>
 </html>

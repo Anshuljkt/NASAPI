@@ -54,6 +54,47 @@ app.get('/', function (req, res) {
   })
 })
 
+app.get('/asteroids', function(req, res) {
+  //Returns Asteroids using NASA's NeoWS API.
+  url = `${API}/neo/rest/v1/feed?detailed=false&api_key=${API_KEY}`;
+  console.log(url);
+  fetch(url, simpleGet)
+  .then(resp => resp.json())
+  .then(resp => {
+    res.send(resp);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+})
+
+app.get('/imagery/:lat/:long', function(req, res) {
+  //Returns JSON data linking to an image from NASA's Earth Imagery API
+  url = `${API}/planetary/earth/imagery/?lat=${req.params.lat}&lon=${req.params.long}&api_key=${API_KEY}`;
+  console.log(url);
+  fetch(url, simpleGet)
+  .then(resp => resp.json())
+  .then(resp => {
+    res.send(resp);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+})
+
+app.get('marsImagery/:sols', function(req, res) {
+  url = `${API}/mars-photos/api/v1/rovers/curiosity/photos?sol=${req.params.sols}&api_key=${API_KEY}`;
+  console.log(url);
+  fetch(url, simpleGet)
+  .then(resp => resp.json())
+  .then(resp => {
+    res.send(resp);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+})
+
 app.listen(9001, function () {
   console.log(`Listening on port 9001`);
 })
