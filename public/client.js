@@ -8,6 +8,7 @@ const content = document.getElementById("dispContent");
 const image = document.getElementById("dispImage");
 const imagerySearchButton = document.getElementById("imagerySearch");
 const marsSearchButton = document.getElementById("curiositySearch");
+const librarySearchButton = document.getElementById("librarySearch");
 
 
 asteroidButton.addEventListener('click', function (e) {
@@ -80,6 +81,90 @@ imagerySearchButton.addEventListener('click', function (e) {
     }
 })
 
-marsSearchButton.addEventListener('click', function(e) {
-    
+marsSearchButton.addEventListener('click', function (e) {
+    sols = document.getElementById('sol').value;
+    if (sols < 0 || sols === '') {
+        alert("Sol must be non-negative!");
+    } else {
+        var request = new XMLHttpRequest()
+        request.open('GET', `/marsImagery/${sols}`, true)
+        request.onload = function () {
+            data = JSON.parse(this.response);
+            data = data.photos;
+            var roverPhotos = [];
+            data.forEach(photo => {
+                console.log(photo);
+                var currPhoto = {
+                    date: photo.earth_date,
+                    camera: photo.camera.full_name,
+                    link: photo.img_src,
+                }
+                console.log(currPhoto)
+                roverPhotos.push(currPhoto);
+            })
+
+            rightTitle.textContent = "Curiosity Rover Imagery"
+            rightText.textContent = `Using NASA's Mars Rover Photos API for Sol ${sols} of Curiosity's mission`
+            var table = new Tabulator("#dispContent", {
+                data: roverPhotos,
+                layout: "fitDataFill",
+                height: "100%",
+                responsiveLayout: true,
+                columns: [
+                    { title: "Earth Date", field: "date", sorter: "date" },
+                    { title: "Camera", field: "camera", sorter: "string" },
+                    { title: "Link", field: "link", formatter: "link", formatterParams: { label: "View image" } }
+                ]
+            });
+            table.redraw(true);
+        }
+        request.send();
+    }
+})
+
+librarySearchButton.addEventListener('click', function (e) {
+    searchQ = document.getElementById('searchQ').value;
+    if (searchQ === "") {
+        alert("Please enter a search term!");
+    } else {
+        var request = new XMLHttpRequest()
+        request.open('GET', `/search/${searchQ}`, true)
+        request.onload = function () {
+            data = JSON.parse(this.response);
+            data = data.collection.items;
+
+            rightTitle.textContent = "NASA Image and Video Library Search"
+            rightText.textContent = `Using NASA's Public Image and Video Library API`
+            var table = new Tabulator("#dispContent", {
+                layout: "fitDataFill",
+                height: "100%",
+                responsiveLayout: true,
+                columns: [
+                    { title: "Title", field: "title", sorter: "string", width:200 },
+                    { title: "Date", field: "date" },
+                    { title: "Type", field: "type", sorter: "string" },
+                    { title: "Link", field: "link", formatter: "link", formatterParams: { label: "View media" } }
+                ]
+            });
+            data.forEach(result => {
+                linkToMedia = result.href
+                fetch(linkToMedia)
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json);
+                    href = json[0];
+                    var currResult = {
+                        type: result.data[0].media_type,
+                        date: result.data[0].date_created,
+                        title: result.data[0].title,
+                        link: href
+                    }
+                    table.addData(currResult);
+                })
+                
+            })
+            table.redraw(true);
+        }
+        request.send();
+    }
 })

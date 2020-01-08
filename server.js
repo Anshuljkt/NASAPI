@@ -82,8 +82,21 @@ app.get('/imagery/:lat/:long', function(req, res) {
   })
 })
 
-app.get('marsImagery/:sols', function(req, res) {
+app.get('/marsImagery/:sols', function(req, res) {
   url = `${API}/mars-photos/api/v1/rovers/curiosity/photos?sol=${req.params.sols}&api_key=${API_KEY}`;
+  console.log(url);
+  fetch(url, simpleGet)
+  .then(resp => resp.json())
+  .then(resp => {
+    res.send(resp);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+})
+
+app.get('/search/:query', function(req, res) {
+  url = `https://images-api.nasa.gov/search?q=${req.params.query}`
   console.log(url);
   fetch(url, simpleGet)
   .then(resp => resp.json())
