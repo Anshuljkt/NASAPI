@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head title="NASAPI Explorer">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        <link rel="stylesheet" href="/tabulator/css/tabulator_modern.min.css">
-    </head>
-        <body>
-            <div id="container">
-                <div id="left">
-                    <h1 id="title">NASAPI Explorer</h1>
-                    <p id="byline">Out of this world!</p>
-                    <button id="asteroids">Show asteroids closest to Earth</button>
-                    <button id="epic">View most recent imagery from EPIC camera</button>
-                    <form id="earthImagery">
-                        Latitude: <input type = "number" id = "lat">
-                        Longitude: <input type = "number" id = "long">
-                        <button type="button" id="imagerySearch">Fetch Earth imagery</button>
-                    </form>
-                    <form id="curiosityImagery">
-                        Sol # of Curiosity Rover's mission: <input type = "number" id = "sol">
-                        <button type="button" id="curiositySearch">Fetch Mars imagery</button>
-                    </form>
-                    
-                    <form id="ImageVideoLibrary">
-                        Search NASA's Image and Video Library: <input type = "text" id = "searchQ">
-                        <button type="button" id="librarySearch">Search</button>
-                    </form>
-                </div>
-                <div id="right">
-                    <h1 id="dispTitle">NASA's Astronomy Picture of the Day</h1>
-                    <p id="dispText"></p>
-                    <div id="dispContent">
-                        <img id="dispImage" src="<%=imgSrc%>" title="<%=text%>"> </img>
-                    </div>
-                    
-                </div>
+
+<head title="NASAPI Explorer">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="/tabulator/css/tabulator_modern.min.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="left">
+            <h1 id="title">NASAPI Explorer</h1>
+            <p id="byline">Out of this world!</p>
+            <button id="asteroids">Show asteroids closest to Earth</button>
+            <button id="epic">View most recent imagery from EPIC camera</button>
+            <form id="earthImagery">
+                Latitude: <input type="number" id="lat">
+                Longitude: <input type="number" id="long">
+                <button type="button" id="imagerySearch">Fetch Earth imagery</button>
+            </form>
+            <form id="curiosityImagery">
+                Sol # of Curiosity Rover's mission: <input type="number" id="sol">
+                <button type="button" id="curiositySearch">Fetch Mars imagery</button>
+            </form>
+
+            <form id="ImageVideoLibrary">
+                Search NASA's Image and Video Library: <input type="text" id="searchQ">
+                <button type="button" id="librarySearch">Search</button>
+            </form>
+        </div>
+        <div id="right">
+            <h1 id="dispTitle">NASA's Astronomy Picture of the Day</h1>
+            <p id="dispText"></p>
+            <div id="dispContent">
+                <img id="dispImage" src="<%=imgSrc%>" title="<%=text%>"> </img>
             </div>
-            <script src="jquery-3.4.1.min.js"></script>
-            <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
-            <script type="text/javascript" src="client.js"></script>
-        </body>
+
+        </div>
+    </div>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/tabulator/js/tabulator.min.js"></script>
+    <script type="text/javascript" src="client.js"></script>
+</body>
+
 </html>
